@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projrct/widgets/drawer.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class HomePage extends StatelessWidget {
             child: Text("Welcome To My $Rohit App")
         ),
       ),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
     );
   }
 }
