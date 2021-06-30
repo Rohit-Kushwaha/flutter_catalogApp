@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projrct/model/catalog.dart';
+import 'dart:convert';
 
 class ItemWidget extends StatelessWidget{
   final Item item;
@@ -15,6 +16,9 @@ class ItemWidget extends StatelessWidget{
       // shape: StadiumBorder,
       elevation: 6,
       child: ListTile(
+        onTap: () {
+          print("${item.name} pressed");
+        },
         leading: Image.network(item.image),
         title: Text(item.name),
         subtitle: Text(item.desc),
