@@ -8,7 +8,13 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text("Catalog App")),
+        // backgroundColor: Colors.white,
+        //   title: Text("Catalog Apps",
+        //     style: TextStyle(
+        //         color: Colors.black,),
+          ),
+              // iconTheme: IconThemeData(color: Colors.black),
+      // ),
       body: Center(
         child: Container(
             child: Text("Welcome To My $Rohit App")

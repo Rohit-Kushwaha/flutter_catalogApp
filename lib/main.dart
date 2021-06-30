@@ -3,6 +3,7 @@ import 'package:projrct/pages/LoginPage.dart';
 import 'package:projrct/pages/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projrct/utils/routes.dart';
+import 'package:projrct/widgets/themes.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,17 +16,28 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: HomePage(),
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        fontFamily: GoogleFonts.lato().fontFamily,
-      ),
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
+      // theme: ThemeData(
+      // primarySwatch: Colors.deepOrange,
+      // fontFamily: GoogleFonts.lato().fontFamily,
+      // appBarTheme: AppBarTheme(
+      // color : Colors.white,
+      // elevation: 2.0,
+      // iconTheme: IconThemeData(color: Colors.black),
+      // textTheme: Theme.of(context).textTheme,
+      // )
+      // ),
+
+      // darkTheme: ThemeData(
+      // brightness: Brightness.dark,
+      // ),
+
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
+
       initialRoute: "/",
       routes: {
-        "/" : (context) => LoginPage(),
+        "/": (context) => LoginPage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => HomePage(),
       },
