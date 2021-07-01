@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projrct/model/catalog.dart';
-import 'package:projrct/widgets/drawer.dart';
-import 'package:projrct/widgets/items.dart';
+import 'package:projrct/widgets/themes.dart';
 import 'dart:convert';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,94 +38,110 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var Rohit = "catalog";
-    // final dummyList = List.generate(10, (index) => Catalog.items[0]);
-
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.white,
-        title: Text("Catalog Apps"),
-        //     style: TextStyle(
-        //         color: Colors.black,),
+      backgroundColor: MyTheme.colorCream,
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32, //padding from all sides
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Header(),
+              if (Catalog.items != null && Catalog.items.isNotEmpty)
+                CatalogList().expand()
+              else
+                Center(child: CircularProgressIndicator()),
+            ],
+          ),
+        ),
       ),
-      // iconTheme: IconThemeData(color: Colors.black),
-      // ),
-      body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: (Catalog.items != null && Catalog.items.isNotEmpty)
-              ? GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16),
-                  itemBuilder: (context, index) {
-                    final item = Catalog.items[index];
-
-                    return Card(
-                        clipBehavior: Clip.antiAlias, // for corners
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-
-                        child: GridTile(
-
-                            header: Container(
-                              child: Text(
-                                item.name,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              // because of fix values so the compiler does not draw again and again
-                              decoration: BoxDecoration(
-                                color: Colors.deepOrange,
-                              ),
-                            ),
-
-                            child: Image.network(item.image),
-
-                            footer: Container(
-                              child: Text(
-                                item.name,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              // because of fix values so the compiler does not draw again and again
-                              decoration: BoxDecoration(
-                                color: Colors.deepOrange,
-                              ),
-                              //
-                            )));
-                  },
-                  itemCount: Catalog.items.length)
-              : Center(
-                  child: CircularProgressIndicator(),
-                )),
-
-      // itemCount: Catalog.items.length,  // 4 lines are just for listview display
-      // itemBuilder: (context, index) {
-      //   return ItemWidget(
-      //     item: Catalog.items[index],
-
-      // itemCount: Catalog.items.length,
-      // itemCount: dummyList.length, // for replicating the images
-
-      // item: dummyList[0], // for replicating the images
-      // item: Catalog.items[index],
-      // )
-      // },
-
-      // )
-      // ),
-
-      // body: center{
-      // child: Container(
-      //     child: Text("Welcome To My $Rohit App")
-      // ),
-      // }
-      // }
-      //   ),
-      drawer: MyDrawer(),
     );
+  }
+}
+
+class Header extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      "Catalog App".text.xl5.bold.color(MyTheme.darkbluihsCream).make(),
+      // like Text("");
+      "Trending Products".text.xl2.make(),
+    ]);
+  }
+}
+
+class CatalogList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        shrinkWrap: true,
+        //because you are trying to use the list in column or for fit space
+        itemCount: Catalog.items.length,
+        itemBuilder: (context, index) {
+          final catalog = Catalog.items[index];
+          return CatalogItem(catalog: catalog);
+        });
+  }
+}
+
+class CatalogItem extends StatelessWidget {
+  final Item catalog;
+
+  const CatalogItem({Key key, @required this.catalog})
+      : assert(catalog != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return VxBox(
+      child: Row(
+        children: [
+          CatalogImage(image: catalog.image),
+          Expanded(
+              child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+               catalog.name.text.xl.color(Colors.black87).bold.make(),
+               catalog.desc.text.textStyle(context.captionStyle).make(),
+               10.heightBox,
+               ButtonBar(
+                buttonPadding: EdgeInsets.zero,
+                alignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "\$${catalog.price}".text.bold.xl.make(),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(MyTheme.darkbluihsCream),
+                        shape: MaterialStateProperty.all(StadiumBorder()),
+                      ),
+                      child: "Buy".text.make()),
+                ],
+              ).pOnly(right: 8.0)
+            ],
+          ))
+        ],
+      ),
+    )
+        .white.rounded.square(125).make().py16();
+    // .white.rounded.r
+  }
+}
+
+class CatalogImage extends StatelessWidget {
+  final String image;
+
+  const CatalogImage({Key key, @required this.image})
+      : assert(image != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      image,
+    ).box.p8.rounded.color(MyTheme.colorCream).make().p8();
+    // .wHalf(context),
   }
 }
