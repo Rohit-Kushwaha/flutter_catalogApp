@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
       // home: HomePage(),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       // theme: ThemeData(
@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
 
       initialRoute: "/",
       routes: {
-        "/": (context) => HomePage(),
-        MyRoutes.loginRoute: (context) => HomePage(),
+        "/": (context) => LoginPage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.cart: (context) => CartPage(),
       },

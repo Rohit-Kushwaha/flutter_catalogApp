@@ -18,9 +18,9 @@ class HomeDetailsPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         // shadowColor: MyTheme.colorCream,
       ),
-      backgroundColor: MyTheme.colorCream,
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           buttonPadding: EdgeInsets.zero,
           alignment: MainAxisAlignment.spaceBetween,
@@ -30,13 +30,13 @@ class HomeDetailsPage extends StatelessWidget {
               onPressed: () {},
               style: ButtonStyle(
                 backgroundColor:
-                MaterialStateProperty.all(MyTheme.darkbluihsCream),
+                MaterialStateProperty.all(context.theme.buttonColor),
                 shape: MaterialStateProperty.all(StadiumBorder()),
               ),
               child: "Add To Cart".text.make(),
             ).wh(115, 50),
           ],
-        ).px32(),
+        ).p16(),
       ),
 
       body: SafeArea(
@@ -53,10 +53,10 @@ class HomeDetailsPage extends StatelessWidget {
               edge: VxEdge.TOP,
               child: Container(
                 width: context.screenWidth, // for fitting the size
-                color: Colors.white,
+                color: context.cardColor,
                 child: Column(
                   children: [
-                    catalog.name.text.xl4.color(MyTheme.darkbluihsCream).bold.make(),
+                    catalog.name.text.xl4.color(context.accentColor).bold.make(),
                     catalog.desc.text.xl.textStyle(context.captionStyle).make(),
                     "lajdflj kdfjldjfl ksjfl jsl kljfl jas;fljfljdsl jdfkljla  lkjlfk jflj lfldjlkj fklakjfkjid lkjlkjlkj kfjdjflkjo kjfjlfj jlkjgoi kjdaj kj gijl j kjlkjoj lkijijoijij k oi joij oigj  kfjlj l "
                         .text.textStyle(context.captionStyle).make().p16(),
