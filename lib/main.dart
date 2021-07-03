@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projrct/pages/LoginPage.dart';
+import 'package:projrct/pages/cart_page.dart';
 import 'package:projrct/pages/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projrct/utils/routes.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => HomePage(),
         MyRoutes.loginRoute: (context) => HomePage(),
         MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.cart: (context) => CartPage(),
       },
     );
   }
